@@ -54,37 +54,30 @@ In it you'll find a folder called "GvSOC" containing the code used to extract HP
 
 ## Planned Thesis Structure
 1. **Introduction**
-- Research Objectives  
-- Research Questions  
-2. **State of the Art**
-   - Embedded security & malware  
-     - Embedded and IoT Security Landscape  
-       - Security Challenges in Embedded and IoT Devices  
-     - Software exploitation and Malware in Embedded systems  
-       - Malware in Embedded systems  
-       - Software exploitation in Embedded systems  
-   - RISC-V architecture  
-   - Hardware Performance Counters  
-     - Usage of HPC in software exploitation and malware detection  
-     - Limitation of HPC in software exploitation and malware detection  
-3. **Threat Model and Attack Scenarios**
-- Research Methodology  
-- Threat Model 
-4. **Experimental Setup**
-   - GVSOC, Chipyard  
-   - Payload and overflow setup  
-   - FPGA Implementation  
-5. **Detection Methodology**
-   - Detection Architecture  
-   - Data collection via HPCs  
-   - Analysis techniques  
-   - Tool Development  
-6. **Results**
-- Experimental Evaluation  
-- Results  
-7. **Challenges, limitations**
-- Limitations of HPC  
-- Validation and Verification  
+   - Research Objectives  
+   - Research Questions  
+2. **Literature Review**
+    - Embedded and IOT Security Landscape
+        - Security Challenges in Embedded and IOT Devices
+    - Software exploitation and Malware in Embedded systems
+        - Malware in Embedded systems
+        - Software exploitation in Embedded systems
+    - Usage of HPC in software exploitation and malware detection
+    - Limitation of HPC in software exploitation and malware detection
+3. **Methodology**
+    - Research Methodology
+    - Threat Model
+    - Detection Architecture
+    - FPGA Implementation
+4. **Implementation**
+    - PULP Implmentation
+    - Custom HPC Implementaion in Chipyard
+    - FPGA
+    - Tool Development
+    - Validation and Verification
+5. **Dataset Generation and Automation**
+6. **Experimental Evaluation**
+7. **Results**
 8. **Conclusion**
 
 ## Threat Modeling 
