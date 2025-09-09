@@ -22,9 +22,21 @@ In it you'll find a folder called "GvSOC" containing the code used to extract HP
    - Successfully simulated simple buffer overflow attacks and collected HPC data.
    - However, the software exploitation using GvSOC were limited (no OS, minimal libc, no input).
 
-4. **Upcoming Work**
-   - Transitioning to **Chipyard** to allow more complex exploitations.
-   - Plan to study the potential impact of new counters on improving detection accuracy (ret counter).
+4. **Switch to Chipyard BOOM**
+   - Created new HPC counters in BOOM core.
+   - Still had limitation (no OS, minimal libc)
+   - Can not run linux
+
+5. **Switch to Chipyard Rocket Core**
+   - Created new HPC counters in Rocket.
+   - Can run linux
+   - Nexys Video limitation
+
+6. **Switch to Rocket Core**
+   - In progress
+   - Can run linux
+   - Following https://github.com/eugene-tarassov/vivado-risc-v
+
 
 ## Current Results
 
@@ -41,21 +53,121 @@ In it you'll find a folder called "GvSOC" containing the code used to extract HP
 3. **Would creating new hardware performance counters improve detection capabilities? If so, what kind of counters would be most effective?**
 
 ## Planned Thesis Structure
-
 1. **Introduction**
+- Research Objectives  
+- Research Questions  
 2. **State of the Art**
-   - Embedded security & malware
-   - RISC-V architecture
-   - Hardware Performance Counters
+   - Embedded security & malware  
+     - Embedded and IoT Security Landscape  
+       - Security Challenges in Embedded and IoT Devices  
+     - Software exploitation and Malware in Embedded systems  
+       - Malware in Embedded systems  
+       - Software exploitation in Embedded systems  
+   - RISC-V architecture  
+   - Hardware Performance Counters  
+     - Usage of HPC in software exploitation and malware detection  
+     - Limitation of HPC in software exploitation and malware detection  
 3. **Threat Model and Attack Scenarios**
+- Research Methodology  
+- Threat Model 
 4. **Experimental Setup**
-   - GVSOC, Chipyard
-   - Payload and overflow setup
+   - GVSOC, Chipyard  
+   - Payload and overflow setup  
+   - FPGA Implementation  
 5. **Detection Methodology**
-   - Data collection via HPCs
-   - Analysis techniques
+   - Detection Architecture  
+   - Data collection via HPCs  
+   - Analysis techniques  
+   - Tool Development  
 6. **Results**
+- Experimental Evaluation  
+- Results  
 7. **Challenges, limitations**
+- Limitations of HPC  
+- Validation and Verification  
 8. **Conclusion**
 
+## Threat Modeling 
+
+
+Insulin Pump
+
+RISC-V Microcontroller 
+- Get Data from glucose sensors
+- Send System logs
+- Activates the Insulin Pump with the right dosage based on the glucose level
+- Raise alerts to Healthcare professionals using a communication channel (Bluetooth, Wifi) in case of urgency
+
+Local Data Store
+- Keeps Logs and glucose levels historic
+Sensors 
+- Track glucose levels and send it to the Microcontroller
+Pump
+- Control the level of glucose sent to the patient
+External Communication 
+- Wifi or bluetooth used to contact healthcare professionals
+
+User Interface
+- LCD screen showing the system metrics and possible system issues
+SecureBoot
+- Check the firmware to be sure it was not altered
+
+# System Diagram without HPC
+Assuming that every threat not related to HPC is already handled 
+
+![screenshot](threat_model_1.png)
+
+Focus on Internal components
+Firmware Trusted because of SecureBoot 
+Local Storage Trusted -> assuming there will be no physical tampering
+
+Sensors Processes
+
+- S: Attacker could pretend to be a sensor
+	- Software exploitation ?
+- T: Attacker could tamper with the data before it arrives to the firmware
+	- Software exploitation ?
+- D: Attacker could send more sensor data to cause a DOS
+
+Pump Process
+
+- T: Attacker could cause the Pump to send too much/few glucose to the patient
+- D: Attacker could cause to the Pump to be unaccessible 
+
+External Communication Process
+
+- T: Attacker could cause alerts to be sent to healthcare without real alerts or real alerts not to be sent
+- D: Attacker could make the Communication channel to go offline 
+
+User interface
+
+- T: Attacker could show fake data to the patient
+
+Service Technician
+- S: Attacker could take the credentials of the technician and update the firmware.
+	- Software exploitation ?
+- T: Attacker could tamper with the update to introduce vulnerabilities
+
+# System Diagram with HPC
+
+Assuming a full anomaly detection, the detection can 
+
+- detect software exploitation
+- tampering detection needs to be evaluated
+- DOS detection needs to be evaluated
+
+However, new threats appears with the new detection process.
+
+HPC monitoring 
+
+- T: Attacker could change the counters and evade detection
+- I: Attacker could access the counters and know the behaviour of the systems
+- D: Attacker could make the detection take more ressource to DOS the ressource contrained system
+
+Mitigation:
+
+- Enclave solve T and I
+- DOS is difficult to mitigate, (experimentation to evaluate the feasibility ?)
+
+![screenshot](threat_model_2.png)
 
