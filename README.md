@@ -6,6 +6,7 @@ The goal of this thesis is to evaluate whether software exploitation can be dete
 
 In it you'll find a folder called "GvSOC" containing the code used to extract HPCs and simulate a buffer overflow. You will also find in this folder the csv file containing the HPCs for each program execution and a python script for displaying a graph of normalized metrics based on the number of instructions executed. I will also create a folder called "Chipyard" in which I will add my current work based on a BOOM core.
 
+Link to the [overleaf](https://www.overleaf.com/project/6875568b9e3e4952bfc323a6)
 ## Methodology 
 
 1. **Literature Review**
